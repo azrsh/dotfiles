@@ -7,3 +7,6 @@ alias acs="acc s"
 alias accs="acc s"
 alias ac="acc"
 alias opc="code main.cpp"
+
+## Rust env
+set PATH ~/.cargo/bin $PATH
