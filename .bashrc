@@ -116,6 +116,8 @@ if ! shopt -oq posix; then
   fi
 fi
 
+export PATH="$PATH:~/zen-linux-x86_64-0.8.20191124+552247019"
+
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
