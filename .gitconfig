@@ -1,3 +1,5 @@
+[core]
+    editor = vim
 [user]
 	name = azarashi2931
 	email = 46126763+azarashi2931@users.noreply.github.com
