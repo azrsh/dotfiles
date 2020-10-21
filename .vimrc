@@ -20,7 +20,7 @@ inoremap ' ''<LEFT>
 inoremap " ""<LEFT>
 
 "=を二回連続入力でバッファ全体をインデント整理
-nnoremap == gg=G
+nnoremap == :LspDocumentFormat<Return>
 
 call plug#begin()
 Plug 'prabirshrestha/async.vim'
