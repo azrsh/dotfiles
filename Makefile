@@ -1,4 +1,4 @@
-CONFIGS:=vim tmux bash fish
+CONFIGS:=vim tmux fish
 
 .ONESHELL:
 
