@@ -3,6 +3,7 @@ set title "編集中のファイル名を表示
 set showmatch "括弧入力時の対応する括弧を表示
 syntax on "コードの色分け
 set incsearch
+set belloff=all
 
 "indent
 set expandtab
@@ -32,5 +33,6 @@ Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'scrooloose/nerdtree'
 call plug#end()
 
