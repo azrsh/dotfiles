@@ -33,6 +33,6 @@ Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdtree'
 call plug#end()
 
