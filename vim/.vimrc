@@ -1,18 +1,19 @@
-set number "行番号を表示する
-set title "編集中のファイル名を表示
-set showmatch "括弧入力時の対応する括弧を表示
-syntax on "コードの色分け
+"editor settings
+set number
+set title
+set showmatch
+syntax on
 set incsearch
 set belloff=all
 
-"indent
+"indent settings
 set expandtab
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set smartindent "オートインデント
 
-"=を二回連続入力でバッファ全体をインデント整理
+"vim-lsp settings
 nnoremap ==     :LspDocumentFormat<CR>
 nnoremap <c-]>  :LspDefinition<CR>
 nnoremap K      :LspHover<CR>
@@ -26,6 +27,12 @@ nnoremap gd     :LspDeclaration<CR>
 nnoremap ]e     :LspNextError<CR>
 nnoremap [e     :LspPreviousError<CR>
 
+"NERDTree settings
+autocmd VimEnter * NERDTree | wincmd p
+nnoremap <leader>n :NERDTreeFocus<CR>
+nnoremap <C-n> :NERDTree<CR>
+nnoremap <C-t> :NERDTreeToggle<CR>
+nnoremap <C-f> :NERDTreeFind<CR>
 
 call plug#begin()
 Plug 'prabirshrestha/async.vim'
@@ -33,6 +40,6 @@ Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdtree'
 call plug#end()
 

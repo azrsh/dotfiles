@@ -4,10 +4,9 @@ dotfiles
 # Dependency
 + GNU Make
 + Git
++ cURL
 
 # How to setup
-```bash
-cd ~/
-git clone git@github.com:azarashi2931/dotfiles.git
-make
+```sh
+curl -L https://git.io/JqeQ6 | sh
 ```
