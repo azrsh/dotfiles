@@ -6,14 +6,23 @@ on:
   pull_request:
 
 jobs:
-  build:
+  make:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
         uses: actions/checkout@v2
 
       - name: Install packages
-        run: sudo apt-get install -y make stow
+        run: sudo apt-get install -y make git stow
         
       - name: Run make
         run: make
+        
+  curl:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install packages
+        run: sudo apt-get install -y make git stow
+        
+      - name: Run curl
+        run: curl -L https://git.io/JqeQ6 | sh
