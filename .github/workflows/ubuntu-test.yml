@@ -25,6 +25,6 @@ jobs:
         run: sudo apt-get install -y git stow
         
       - name: Run curl
-        run: curl -L ${{ github.server_url }}/${{ github.repository }}/blob/${{ github.ref }}/remote.sh | bash
+        run: curl -L ${{ github.server_url }}/${{ github.repository }}/blob/${{ github.ref_name }}/remote.sh | bash
         env:
-          BRANCH: ${{ github.ref }}
+          BRANCH: ${{ github.ref_name }}
