@@ -1,5 +1,0 @@
-.tmux/plugins/
-.tmux/resurrect/
-nvim/.config/nvim/plugged/
-nvim/.local/share/nvim/shada/
-vim/.vim/plugged/
