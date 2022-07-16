@@ -1,10 +1,7 @@
 #!/bin/bash
-set -uex
+set -ueo pipefail
 
-DEFAULT_CONFIGS="vim tmux fish"
-CONFIGS=${@:-"$DEFAULT_CONFIGS"}
+# Entrypoint for codespaces
 
-cd ${HOME}
-git clone git@github.com:azarashi2931/dotfiles.git
-cd dotfiles
-bash setup_local.sh $CONFIGS
+DEFAULT_CONFIGS="vim tmux fish git"
+stow -v --no-folding ${DEFAULT_CONFIGS}
