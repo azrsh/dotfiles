@@ -5,4 +5,4 @@ RUN apt-get install -y stow
 
 COPY ./ /root/dotfiles/
 WORKDIR /root/dotfiles/
-RUN bash setup_local.sh
+RUN bash setup.sh

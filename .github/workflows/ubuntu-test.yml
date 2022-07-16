@@ -6,7 +6,7 @@ on:
   pull_request:
 
 jobs:
-  make:
+  setup:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
@@ -15,8 +15,8 @@ jobs:
       - name: Install packages
         run: sudo apt-get install -y git stow
         
-      - name: Run make
-        run: bash setup_local.sh
+      - name: Run setup.sh
+        run: bash setup.sh
         
   curl:
     runs-on: ubuntu-latest
