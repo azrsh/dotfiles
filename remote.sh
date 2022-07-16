@@ -1,7 +1,7 @@
 #!/bin/bash
 set -ueo pipefail
 
-DEFAULT_CONFIGS="vim tmux fish"
+DEFAULT_CONFIGS="vim tmux fish git"
 CONFIGS=${@:-"$DEFAULT_CONFIGS"}
 
 cd ${HOME}
