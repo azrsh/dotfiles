@@ -11,3 +11,5 @@ alias opc="code main.cpp"
 
 ## Rust env
 set PATH ~/.cargo/bin $PATH
+set -gx VOLTA_HOME "$HOME/.volta"
+set -gx PATH "$VOLTA_HOME/bin" $PATH
