@@ -4,7 +4,9 @@ set -uex
 DEFAULT_CONFIGS="vim tmux fish"
 CONFIGS=${@:-"$DEFAULT_CONFIGS"}
 
+BRANCH=${BRANCH:-"master"}
+
 cd ${HOME}
-git clone https://github.com/azarashi2931/dotfiles.git
+git clone -b master git@github.com:azarashi2931/dotfiles.git
 cd dotfiles
 bash setup_local.sh $CONFIGS
