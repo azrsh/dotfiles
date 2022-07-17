@@ -24,14 +24,6 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
   \| PlugInstall --sync | source $MYVIMRC
 \| endif
 
-"NERDTree settings
-autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() |
-    \ quit | endif
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeToggle<CR>
-nnoremap <C-f> :NERDTreeFind<CR>
-
 if has('nvim')
     nnoremap == :LspDocumentFormat<Return>
     nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
@@ -43,7 +35,6 @@ if has('nvim')
 
     call plug#begin()
     Plug 'neovim/nvim-lspconfig'
-    Plug 'preservim/nerdtree'
     call plug#end()
 else    
     "vim-lsp settings
@@ -66,6 +57,5 @@ else
     Plug 'prabirshrestha/vim-lsp'
     Plug 'mattn/vim-lsp-settings'
     Plug 'prabirshrestha/asyncomplete-lsp.vim'
-    Plug 'preservim/nerdtree'
     call plug#end()
 endif
