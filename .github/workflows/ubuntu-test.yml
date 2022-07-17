@@ -24,7 +24,11 @@ jobs:
       - name: Install packages
         run: sudo apt-get install -y git stow
         
+      - name: Set target branch
+        id: set_taregt_branch
+        run: echo '::set-output name=BRANCH::${{ github.head_ref || "master" }}'
+
       - name: Run curl
         run: curl -L https://raw.githubusercontent.com/${{ github.repository }}/${{ github.head_ref }}/remote.sh | bash
         env:
-          BRANCH: ${{ github.head_ref }}
+          BRANCH: ${{ steps.set_taregt_branch.outputs.BRANCH }}
