@@ -2,8 +2,9 @@ dotfiles
 ---
 
 # Dependency
-+ Git
-+ cURL
+- GNU Stow
+- Git
+- cURL
 
 # How to setup
 ```sh
