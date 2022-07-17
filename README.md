@@ -7,5 +7,5 @@ dotfiles
 
 # How to setup
 ```sh
-curl -L https://git.io/JqeQ6 | bash
+curl -L https://raw.githubusercontent.com/azarashi2931/dotfiles/master/remote.sh | bash
 ```
