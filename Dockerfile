@@ -1,4 +1,4 @@
-FROM ubuntu:latest@sha256:a8fe6fd30333dc60fc5306982a7c51385c2091af1e0ee887166b40a905691fd0
+FROM ubuntu:latest@sha256:dda6886d8d153a2d86f046c9335123c6151d83fd63e446b752ed8d9da261205d
 
 RUN apt-get update
 RUN apt-get install -y stow
