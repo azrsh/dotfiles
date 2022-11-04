@@ -4,4 +4,4 @@ set -ueo pipefail
 # Entrypoint for codespaces
 
 DEFAULT_CONFIGS="vim tmux fish git"
-stow -v --no-folding ${DEFAULT_CONFIGS}
+stow -v --no-folding -d ./config -t ${HOME} ${DEFAULT_CONFIGS}
