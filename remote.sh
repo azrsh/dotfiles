@@ -8,5 +8,4 @@ BRANCH=${BRANCH:-"master"}
 
 cd ${HOME}
 git clone -b ${BRANCH} https://github.com/azarashi2931/dotfiles.git
-cd dotfiles
-stow -v --no-folding ${CONFIGS}
+stow -v --no-folding -d ./dotfiles/config -t ${HOME} ${DEFAULT_CONFIGS}
