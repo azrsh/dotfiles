@@ -1,9 +1,9 @@
 [submodule "tool/5fe3daef7f4a81c076e735e4452fe656"]
 	path = tool/5fe3daef7f4a81c076e735e4452fe656
-	url = git@gist.github.com:5fe3daef7f4a81c076e735e4452fe656.git
+	url = https://gist.github.com/5fe3daef7f4a81c076e735e4452fe656.git
 [submodule "tool/39dede61c4b05ffe4b618bf954a91289"]
 	path = tool/39dede61c4b05ffe4b618bf954a91289
-	url = git@gist.github.com:39dede61c4b05ffe4b618bf954a91289.git
+	url = https://gist.github.com/39dede61c4b05ffe4b618bf954a91289.git
 [submodule "tool/e0a0ccda7cbf2fe345f1ca6c5bd38d47"]
 	path = tool/e0a0ccda7cbf2fe345f1ca6c5bd38d47
-	url = git@gist.github.com:e0a0ccda7cbf2fe345f1ca6c5bd38d47.git
+	url = https://gist.github.com/e0a0ccda7cbf2fe345f1ca6c5bd38d47.git
