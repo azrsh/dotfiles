@@ -1,12 +1,8 @@
 #!/bin/bash
-set -ueo pipefail
+set -euo pipefail
 
 # Entrypoint for codespaces
 
 DEFAULT_CONFIGS="vim tmux fish git"
 CONFIGS=${@:-"$DEFAULT_CONFIGS"}
-stow -v --no-folding -d ./config -t ${HOME} ${CONFIGS}
-
-mkdir -p ./bin
-stow -v --no-folding -d ./tool -t ./bin $(find ./tool/* -type d -exec basename {} \;)
-echo "Please add '$(pwd)/bin' to \$PATH"
+script/install.sh ${CONFIGS}
