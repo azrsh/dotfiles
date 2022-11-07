@@ -5,4 +5,4 @@ set -euo pipefail
 
 DEFAULT_CONFIGS="vim tmux fish git"
 CONFIGS=${@:-"$DEFAULT_CONFIGS"}
-script/install.sh ${CONFIGS}
+script/azdot-install ${CONFIGS}

@@ -1,0 +1,22 @@
+#!/bin/bash
+set -eCo pipefail
+
+function azdot_help() {
+  echo 'install: Install configs and tools'
+  echo 'uninstall: Uninstall configs and tools'
+  echo 'update: Update configs and tools'
+}
+
+if [ -z "${1}" ]; then
+  azdot_help
+  exit 1
+fi
+
+SUBCOMMAND="azdot-$1"
+shift
+if ! which "${SUBCOMMAND}" > /dev/null; then
+    echo "azdot: '${1}' is not a azdot subcommand."
+    exit 1
+fi
+
+"${SUBCOMMAND}" "$@"
