@@ -8,6 +8,6 @@ script/azdot-uninstall ${CONFIGS}
 
 git pull origin "$(git branch --show-current)"
 git submodule foreach git reset --hard HEAD # Discard local changes
-git submodule update
+git submodule update --init
 
 script/azdot-install ${CONFIGS}
