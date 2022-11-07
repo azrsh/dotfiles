@@ -1,7 +1,13 @@
 #!/bin/bash
-set -euo pipefail
+set -euCo pipefail
 
+cd "$(dirname $0)/.."
 CONFIGS=${@}
+
+function script() {
+  mkdir -p ./bin
+  stow -v --no-folding -d . -t ./bin script
+}
 
 function config() {
   stow -v --no-folding -d ./config -t ${HOME} ${CONFIGS}
@@ -18,5 +24,6 @@ function tool() {
   echo "Please add '$(pwd)/bin' to \$PATH"
 }
 
+script
 config
 tool

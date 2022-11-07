@@ -10,4 +10,4 @@ cd ${HOME}
 git clone --recursive -b ${BRANCH} https://github.com/azarashi2931/dotfiles.git
 cd dotfiles
 
-script/install.sh ${DEFAULT_CONFIGS}
+script/azdot-install ${DEFAULT_CONFIGS}
