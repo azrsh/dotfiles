@@ -1,1 +1,0 @@
-./azdot-install
