@@ -10,3 +10,6 @@
 [submodule "tool/b8c3ff4907f6e2704cd2b7b9d611f57c"]
 	path = tool/b8c3ff4907f6e2704cd2b7b9d611f57c
 	url = https://gist.github.com/b8c3ff4907f6e2704cd2b7b9d611f57c.git
+[submodule "tool/46267d1a8e245d9001d6f79a30797c5d"]
+	path = tool/46267d1a8e245d9001d6f79a30797c5d
+	url = https://gist.github.com/46267d1a8e245d9001d6f79a30797c5d.git
