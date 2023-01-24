@@ -13,3 +13,6 @@
 [submodule "tool/46267d1a8e245d9001d6f79a30797c5d"]
 	path = tool/46267d1a8e245d9001d6f79a30797c5d
 	url = https://gist.github.com/46267d1a8e245d9001d6f79a30797c5d.git
+[submodule "tool/b7755a78253075c22531f88cd4355b7c"]
+	path = tool/b7755a78253075c22531f88cd4355b7c
+	url = https://gist.github.com/azarashi2931/b7755a78253075c22531f88cd4355b7c
