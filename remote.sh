@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-DEFAULT_CONFIGS="vim tmux fish git"
+DEFAULT_CONFIGS="vim tmux git"
 CONFIGS=${@:-"$DEFAULT_CONFIGS"}
 
 BRANCH=${BRANCH:-"master"}
