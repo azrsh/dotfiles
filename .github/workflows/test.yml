@@ -1,0 +1,94 @@
+name: Test
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+
+jobs:
+  ubuntu-setup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Install packages
+        run: sudo apt-get install -y stow
+
+      - name: Run setup.sh
+        run: bash setup.sh
+        
+  ubuntu-curl:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install packages
+        run: sudo apt-get install -y git stow
+
+      - name: Run curl
+        run: curl -L https://raw.githubusercontent.com/${{ github.repository }}/${SHA}/remote.sh | bash
+        env:
+          SHA: ${{ github.sha }}
+
+  archlinux-setup:
+    runs-on: ubuntu-latest
+    container: archlinux:latest
+    steps:
+      - name: Install packages
+        run: pacman -Sy --noconfirm git stow
+
+      - name: Check out the repo
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Run setup.sh
+        run: bash setup.sh
+        
+  archlinux-curl:
+    runs-on: ubuntu-latest
+    container: archlinux:latest
+    steps:
+      - name: Install packages
+        run: pacman -Sy --noconfirm curl git stow
+
+      - name: Run curl
+        run: curl -L https://raw.githubusercontent.com/${{ github.repository }}/${SHA}/remote.sh | bash
+        env:
+          SHA: ${{ github.sha }}
+
+  macos-setup:
+    runs-on: macos-latest
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+
+      - name: Move .gitconfig
+        run: |
+          mv ~/.gitconfig ~/.gitconfig.local
+
+      - name: Install packages
+        run: |
+          brew install stow
+        
+      - name: Run setup.sh
+        run: bash setup.sh
+        
+  macos-curl:
+    runs-on: macos-latest
+    steps:
+      - name: Move .gitconfig
+        run: |
+          mv ~/.gitconfig ~/.gitconfig.local
+
+      - name: Install packages
+        run: |
+          brew install git stow
+
+      - name: Run curl
+        run: curl -L https://raw.githubusercontent.com/${{ github.repository }}/${SHA}/remote.sh | bash
+        env:
+          SHA: ${{ github.sha }}
