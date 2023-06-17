@@ -1,0 +1,14 @@
+#!/bin/bash
+
+function config_install() {
+  pushd "${dotfiles_root}"
+  stow -v --no-folding -d ./config -t ${HOME} $(find ./config/* -maxdepth 0 -type d -exec basename {} \;)
+  popd
+}
+
+function config_uninstall() {
+  pushd "${dotfiles_root}"
+  stow -vD --no-folding -d ./config -t ${HOME} $(find ./config/* -maxdepth 0 -type d -exec basename {} \;)
+  popd
+}
+
