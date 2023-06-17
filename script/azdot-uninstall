@@ -1,9 +1,11 @@
 #!/bin/bash
 set -euCo pipefail
 
-cd "$(dirname $0)/.."
-CONFIGS=${@}
+dotfiles_root="$(dirname $0)/.."
+source "${dotfiles_root}/script/lib/script"
+source "${dotfiles_root}/script/lib/config"
+source "${dotfiles_root}/script/lib/tool"
 
-stow -vD --no-folding -d . -t ./bin script
-stow -vD --no-folding -d ./config -t ${HOME} ${CONFIGS}
-stow -vD -d ./tool -t ./bin $(find ./tool/* -type d -exec basename {} \;)
+script_uninstall
+config_uninstall
+tool_uninstall

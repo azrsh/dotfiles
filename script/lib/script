@@ -1,0 +1,14 @@
+#!/bin/bash
+
+function script_install() {
+  pushd "${dotfiles_root}"
+  mkdir -p ./bin
+  stow -v --no-folding -d . -t ./bin script
+  popd
+}
+
+function script_uninstall() {
+  pushd "${dotfiles_root}"
+  stow -vD --no-folding -d . -t ./bin script
+  popd
+}
