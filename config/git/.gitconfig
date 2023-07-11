@@ -1,7 +1,7 @@
-[include]
-    path = ~/.gitconfig.local
 [core]
     editor = vim
 [user]
     name = azrsh
     email = 46126763+azrsh@users.noreply.github.com
+[include]
+    path = ~/.gitconfig.local
