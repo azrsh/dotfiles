@@ -1,7 +1,7 @@
 # dotfiles
 
 [![Publish Ubuntu Docker image](https://github.com/azrsh/dotfiles/actions/workflows/ubuntu-image.yml/badge.svg)](https://github.com/azrsh/dotfiles/actions/workflows/ubuntu-image.yml)
-[![Test on ubuntu:latest](https://github.com/azrsh/dotfiles/actions/workflows/ubuntu-test.yml/badge.svg)](https://github.com/azrsh/dotfiles/actions/workflows/ubuntu-test.yml)
+[![Test](https://github.com/azrsh/dotfiles/actions/workflows/test.yml/badge.svg)](https://github.com/azrsh/dotfiles/actions/workflows/test.yml)
 
 ## Dependency
 - GNU Stow
