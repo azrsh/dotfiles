@@ -1,18 +1,24 @@
 [submodule "tool/5fe3daef7f4a81c076e735e4452fe656"]
 	path = tool/5fe3daef7f4a81c076e735e4452fe656
 	url = https://gist.github.com/5fe3daef7f4a81c076e735e4452fe656.git
+    ignore = dirty
 [submodule "tool/39dede61c4b05ffe4b618bf954a91289"]
 	path = tool/39dede61c4b05ffe4b618bf954a91289
 	url = https://gist.github.com/39dede61c4b05ffe4b618bf954a91289.git
+    ignore = dirty
 [submodule "tool/e0a0ccda7cbf2fe345f1ca6c5bd38d47"]
 	path = tool/e0a0ccda7cbf2fe345f1ca6c5bd38d47
 	url = https://gist.github.com/e0a0ccda7cbf2fe345f1ca6c5bd38d47.git
+    ignore = dirty
 [submodule "tool/b8c3ff4907f6e2704cd2b7b9d611f57c"]
 	path = tool/b8c3ff4907f6e2704cd2b7b9d611f57c
 	url = https://gist.github.com/b8c3ff4907f6e2704cd2b7b9d611f57c.git
+    ignore = dirty
 [submodule "tool/46267d1a8e245d9001d6f79a30797c5d"]
 	path = tool/46267d1a8e245d9001d6f79a30797c5d
 	url = https://gist.github.com/46267d1a8e245d9001d6f79a30797c5d.git
+    ignore = dirty
 [submodule "tool/b7755a78253075c22531f88cd4355b7c"]
 	path = tool/b7755a78253075c22531f88cd4355b7c
 	url = https://gist.github.com/b7755a78253075c22531f88cd4355b7c
+    ignore = dirty
