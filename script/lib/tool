@@ -2,20 +2,20 @@
 
 function tool_install() {
   pushd "${dotfiles_root}"
-  mkdir -p ./bin
-  stow -v --no-folding -d ./tool -t ./bin $(find ./tool/* -type d -exec basename {} \;)
+  mkdir -p ${HOME}/.local/bin
+  stow -v --no-folding -d ./tool -t ${HOME}/.local/bin $(find ./tool/* -type d -exec basename {} \;)
 
-  local binaries="$(find ./bin/* -mindepth 0 -maxdepth 0 -type l)"
+  local binaries="$(find ${HOME}/.local/bin/* -mindepth 0 -maxdepth 0 -type l)"
   if [ -n "${binaries}" ]; then
     chmod +x $binaries
   fi
-  echo "Please add '$(pwd)/bin' to \$PATH"
+  echo "Please add '\${HOME}/.local/bin' to \$PATH"
   popd
 }
 
 
 function tool_uninstall() {
   pushd "${dotfiles_root}"
-  stow -vD -d ./tool -t ./bin $(find ./tool/* -type d -exec basename {} \;)
+  stow -vD -d ./tool -t ${HOME}/.local/bin $(find ./tool/* -type d -exec basename {} \;)
   popd
 }

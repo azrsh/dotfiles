@@ -1,13 +1,14 @@
 #!/bin/bash
 set -euCo pipefail
 
-cd "$(dirname $0)/.."
-CONFIGS=${@}
+realpath="$(realpath $0)"
+dotfiles_root="$(dirname ${realpath})/.."
+cd "${dotfiles_root}"
 
-script/azdot-uninstall ${CONFIGS}
+script/azdot-uninstall
 
 git pull origin "$(git branch --show-current)"
 git submodule foreach git reset --hard HEAD # Discard local changes
 git submodule update --init
 
-script/azdot-install ${CONFIGS}
+script/azdot-install

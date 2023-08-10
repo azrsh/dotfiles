@@ -2,13 +2,13 @@
 
 function script_install() {
   pushd "${dotfiles_root}"
-  mkdir -p ./bin
-  stow -v --no-folding -d . -t ./bin script
+  mkdir -p ${HOME}/.local/bin
+  stow -v --no-folding -d . -t ${HOME}/.local/bin script
   popd
 }
 
 function script_uninstall() {
   pushd "${dotfiles_root}"
-  stow -vD --no-folding -d . -t ./bin script
+  stow -vD --no-folding -d . -t ${HOME}/.local/bin script
   popd
 }
