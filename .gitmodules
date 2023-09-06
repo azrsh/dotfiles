@@ -22,3 +22,7 @@
 	path = tool/b7755a78253075c22531f88cd4355b7c
 	url = https://gist.github.com/b7755a78253075c22531f88cd4355b7c
     ignore = dirty
+[submodule "tool/377ca86cdaf119bb61cca8e0a2880217"]
+	path = tool/377ca86cdaf119bb61cca8e0a2880217
+	url = https://gist.github.com/377ca86cdaf119bb61cca8e0a2880217.git
+    ignore = dirty
