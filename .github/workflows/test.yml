@@ -59,7 +59,7 @@ jobs:
           SHA: ${{ github.sha }}
 
   macos-setup:
-    runs-on: macos-latest
+    runs-on: macos-13
     steps:
       - name: Check out the repo
         uses: actions/checkout@v4

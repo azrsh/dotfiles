@@ -1,7 +1,8 @@
 #!/bin/bash
 set -euCo pipefail
 
-dotfiles_root="$(dirname $0)/.."
+realpath="$(realpath $0)"
+dotfiles_root="$(dirname ${realpath})/.."
 source "${dotfiles_root}/script/lib/script"
 source "${dotfiles_root}/script/lib/config"
 source "${dotfiles_root}/script/lib/tool"
