@@ -22,6 +22,8 @@ if has('nvim')
     nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
     nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
 else    
+    let g:lsp_diagnostics_virtual_text_enabled = 0
+    let g:lsp_diagnostics_float_cursor = 1
     nnoremap ==     :LspDocumentFormat<CR>
     nnoremap <c-]>  :LspDefinition<CR>
     nnoremap K      :LspHover<CR>
