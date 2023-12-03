@@ -5,6 +5,8 @@ set showmatch
 syntax on
 set incsearch
 set belloff=all
+set list
+set listchars=tab:>\ 
 
 "indent settings
 set expandtab
