@@ -26,6 +26,10 @@
 	path = tool/377ca86cdaf119bb61cca8e0a2880217
 	url = https://gist.github.com/377ca86cdaf119bb61cca8e0a2880217.git
 	ignore = dirty
+[submodule "tool/91149d024587e1feaf37ebf5913bb3c1"]
+	path = tool/91149d024587e1feaf37ebf5913bb3c1
+	url = https://gist.github.com/91149d024587e1feaf37ebf5913bb3c1.git
+	ignore = dirty
 [submodule "config/vim/.vim/pack/lsp/start/async.vim"]
 	path = config/vim/.vim/pack/lsp/start/async.vim
 	url = https://github.com/prabirshrestha/async.vim
