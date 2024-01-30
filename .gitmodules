@@ -44,3 +44,6 @@
 [submodule "config/nvim/.config/nvim/pack/lsp/start/nvim-lspconfig"]
 	path = config/nvim/.config/nvim/pack/lsp/start/nvim-lspconfig
 	url = https://github.com/neovim/nvim-lspconfig
+[submodule "config/vim/.vim/pack/github/start/copilot.vim"]
+	path = config/vim/.vim/pack/github/start/copilot.vim
+	url = https://github.com/github/copilot.vim.git
