@@ -71,6 +71,8 @@ jobs:
           mv ~/.gitconfig ~/.gitconfig.local
 
       - name: Install packages
+        env:
+          HOMEBREW_NO_AUTO_UPDATE: 1
         run: |
           brew install stow
         
@@ -85,8 +87,10 @@ jobs:
           mv ~/.gitconfig ~/.gitconfig.local
 
       - name: Install packages
+        env:
+          HOMEBREW_NO_AUTO_UPDATE: 1
         run: |
-          brew install git stow
+          brew install stow
 
       - name: Run curl
         run: curl -L https://raw.githubusercontent.com/${{ github.repository }}/${SHA}/remote.sh | bash
