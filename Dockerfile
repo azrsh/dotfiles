@@ -1,4 +1,4 @@
-FROM ubuntu:latest@sha256:aa772c98400ef833586d1d517d3e8de670f7e712bf581ce6053165081773259d
+FROM ubuntu:latest@sha256:d21429c4635332e96a4baae3169e3f02ac8e24e6ae3d89a86002d49a1259a4f7
 
 RUN apt-get update && \
   apt-get install -y stow tmux vim
