@@ -7,6 +7,9 @@ set incsearch
 set belloff=all
 set list
 set listchars=tab:>\ 
+set re=0
+set mouse=a
+set hlsearch
 
 "indent settings
 set expandtab
@@ -15,6 +18,8 @@ set softtabstop=4
 set shiftwidth=4
 set smartindent
 
+set clipboard^=unnamedplus,unnamed
+
 if has('nvim')
     nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
     nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
@@ -22,7 +27,7 @@ if has('nvim')
     nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
     nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
     nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-else    
+else
     let g:lsp_diagnostics_virtual_text_enabled = 0
     let g:lsp_diagnostics_float_cursor = 1
     nnoremap ==     :LspDocumentFormat<CR>
