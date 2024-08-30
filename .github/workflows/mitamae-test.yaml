@@ -1,0 +1,62 @@
+name: mitamae Test
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+
+jobs:
+  find:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      tests: ${{ steps.convert-to-json.outputs.value }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: tests
+        run: |
+          tests="$(ls -A mitamae/cookbooks)"
+          echo "${tests}"
+          echo 'value<<EOF' >> $GITHUB_OUTPUT
+          echo "${tests}" >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
+        shell: bash
+      - id: convert-to-json
+        run: |
+          json="$(echo '${{ steps.tests.outputs.value }}' | jq -R -s -c 'split("\n") | map(select(length > 0))')"
+          echo "${json}"
+          echo 'value<<EOF' >> $GITHUB_OUTPUT
+          echo "${json}" >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
+        shell: bash
+
+  test:
+    runs-on: macos-latest
+    permissions:
+      contents: read
+    needs: find
+    # Handle empty needs to resolve ` Matrix vector 'test' does not contain any values` error
+    if: ${{ needs.find.outputs.tests != '[]' }}
+    strategy:
+      fail-fast: false
+      matrix:
+        test: ${{ fromJson(needs.find.outputs.tests) }}
+    steps:
+      - uses: actions/checkout@v4
+      - working-directory: mitamae
+        run: |
+          bin/setup
+          bin/mitamae local -l debug cookbooks/${{ matrix.test }}/default.rb     
+
+  e2e-test:
+    runs-on: macos-latest
+    permissions:
+      contents: read
+      id-token: write
+    needs: test
+    steps:
+      - uses: actions/checkout@v4
+      - working-directory: mitamae
+        run: |
+          bash install.sh -l debug
