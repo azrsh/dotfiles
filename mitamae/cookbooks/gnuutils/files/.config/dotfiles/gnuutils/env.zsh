@@ -1,0 +1,5 @@
+export PATH="/opt/homebrew/opt/binutils/bin:${PATH}"
+export PATH="/opt/homebrew/opt/coreutils/libexec/gnubin:${PATH}"
+export PATH="/opt/homebrew/opt/diffutils/libexec/bin:${PATH}"
+export PATH="/opt/homebrew/opt/findutils/libexec/gnubin:${PATH}"
+export PATH="/opt/homebrew/opt/moreutils/bin:${PATH}"

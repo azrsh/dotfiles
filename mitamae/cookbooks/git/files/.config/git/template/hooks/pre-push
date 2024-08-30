@@ -1,0 +1,14 @@
+#!/bin/bash
+set -euo pipefail
+
+readonly restricted_branches=('main' 'master' 'develop')
+
+while read local_ref local_sha1 remote_ref remote_sha1
+do
+  for branch in ${restricted_branches}; do
+    if [[ "${remote_ref##refs/heads/}" = "${branch}" ]]; then
+      echo "Do not push to ${branch} branch!!!"
+      exit 1
+    fi
+  done
+done
