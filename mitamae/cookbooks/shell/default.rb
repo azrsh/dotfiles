@@ -31,6 +31,7 @@ files = [
 ]
 
 directory "#{home}/.config/dotfiles/shell"
+directory "#{home}/.config/dotfile-zsh"
 
 for file in files
   remote_file "#{home}/#{file}" do

@@ -9,27 +9,33 @@ define :tool, repository: nil, revision: nil do
   dirname = repo.gsub(/^https?:\/\/.*\/([^\/]*)\.git$/, '\1')
   dirpath = "#{home}/.local/tool/#{dirname}"
 
+  package "stow"
+
   git dirpath do
     repository repo
     revision rev
   end
 
   execute "chmod in #{dirpath}" do
+    # Sometimes, the action is overwritten to :sync, so write it explicitly
+    action :nothing 
     command <<EOC
       binaries="$(find #{dirpath} -mindepth 0 -maxdepth 0 -type l)"
       if [ -n "${binaries}" ]; then
         chmod +x $binaries
       fi
 EOC
-    subscribes :sync, "git[#{dirpath}]"
+    subscribes :run , "git[#{dirpath}]"
   end
 
   directory "#{home}/.local/bin"
 
   execute "symbolic link" do
+    action :nothing 
     command <<EOC
       stow -v --no-folding -d #{home}/.local/tool -t #{home}/.local/bin #{dirname}
 EOC
+    subscribes :run , "git[#{dirpath}]"
   end
 end
 

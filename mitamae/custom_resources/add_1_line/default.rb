@@ -3,6 +3,8 @@ define :add_1_line, path: nil, line: nil do
   path = params[:path] || name
   line = params[:line]
 
+  file path
+
   file path do
     action :edit
     block do |content|

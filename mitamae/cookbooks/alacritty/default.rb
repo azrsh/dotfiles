@@ -32,7 +32,7 @@ execute "detach Alacritty" do
 end
 
 home = run_command("printenv HOME").stdout.strip
-config_file_path = ".config/alacritty/alacritty.toml"
-remote_file "#{home}/#{config_file_path}" do
-  source "files/#{config_file_path}"
+directory "#{home}/.config/alacritty"
+remote_file "#{home}/.config/alacritty/alacritty.toml" do
+  cwd home
 end
