@@ -1,13 +1,10 @@
 #!/bin/bash
-set -euo pipefail
-
-DEFAULT_CONFIGS="vim tmux git"
-CONFIGS=${@:-"$DEFAULT_CONFIGS"}
+set -euCo pipefail
 
 BRANCH=${BRANCH:-"master"}
 
-cd ${HOME}
-git clone --recursive -b ${BRANCH} https://github.com/azrsh/dotfiles.git
-cd dotfiles
+tmpdir="$(mktemp -d)"
+git clone --recursive -b ${BRANCH} https://github.com/azrsh/dotfiles.git ${tmpdir}
+cd ${tmpdir}
 
-script/azdot-install ${DEFAULT_CONFIGS}
+bash setup.sh -n
