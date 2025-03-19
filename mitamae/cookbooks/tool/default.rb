@@ -67,6 +67,10 @@ tool "https://gist.github.com/91149d024587e1feaf37ebf5913bb3c1.git" do
   revision "b926859c9877b3109e4269fa0425116d652a53c1"
 end
 
+tool "https://gist.github.com/azrsh/9a57323deed928f7e4580bbdc0b25742.git" do
+  revision "2c6c933d832e16db499b135fb8af2aa53d18eeaa"
+end
+
 add_1_line "#{home}/.zshenv" do
   line 'PATH="${HOME}/.local/bin:${PATH}"'
 end
