@@ -1,5 +1,6 @@
 include_recipe "../../cookbooks/alacritty"
 include_recipe "../../cookbooks/direnv"
+include_recipe "../../cookbooks/docker"
 include_recipe "../../cookbooks/git"
 include_recipe "../../cookbooks/gnuutils"
 include_recipe "../../cookbooks/shell"
