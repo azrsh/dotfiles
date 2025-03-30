@@ -8,6 +8,10 @@
 	templateDir = ~/.config/git/template
 [alias]
 	default-branch = symbolic-ref refs/remotes/origin/HEAD
-	branch-prune = "!function f() {\n  git for-each-ref refs/heads/ \"--format=%(refname:short)\" |\n    while read branch; do\n      ancestor=$(git merge-base master $branch) &&\n        [[ $(git cherry master $(git commit-tree $(git rev-parse $branch^{tree}) -p $ancestor -m _)) == \"-\"* ]] &&\n        git branch -D $branch\n    done\n}; f"
+	branch-prune = "!function f() {\n  git for-each-ref refs/heads/ \"--format=%(refname:short)\" |\n    while read branch; do\n      ancestor=$(git merge-base $(git default-branch) $branch) &&\n        [[ $(git cherry $(git default-branch)  $(git commit-tree $(git rev-parse $branch^{tree}) -p $ancestor -m _)) == \"-\"* ]] &&\n        git branch -D $branch\n    done\n}; f"
+[diff]
+	tool = vimdiff
+[push]
+	autoSetupRemote = true
 [include]
 	path = ~/.gitconfig.local
