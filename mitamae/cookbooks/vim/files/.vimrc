@@ -20,6 +20,8 @@ set smartindent
 
 set clipboard^=unnamedplus,unnamed
 
+command! Pe bd | setlocal buftype=nofile | execute 'r!git ls-files | peco' | e <cfile>
+
 if has('nvim')
     nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
     nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
