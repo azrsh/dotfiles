@@ -11,7 +11,7 @@ jobs:
     permissions:
       contents: read
     outputs:
-      tests: ${{ steps.convert-to-json.outputs.value }}
+      cookbooks: ${{ steps.convert-to-json.outputs.value }}
     steps:
       - uses: actions/checkout@v4
       - id: tests
@@ -32,7 +32,7 @@ jobs:
         shell: bash
 
   test:
-    runs-on: macos-latest
+    runs-on: ${{ matrix.platform }}
     permissions:
       contents: read
     needs: find
@@ -41,20 +41,25 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        test: ${{ fromJson(needs.find.outputs.tests) }}
+        cookbook: ${{ fromJson(needs.find.outputs.cookbooks) }}
+        platform: ["macos-latest", "ubuntu-latest"]
     steps:
       - uses: actions/checkout@v4
       - working-directory: mitamae
         run: |
           bin/setup
-          bin/mitamae local -l debug cookbooks/${{ matrix.test }}/default.rb     
+          bin/mitamae local -l debug cookbooks/${{ matrix.cookbook }}/default.rb     
 
   e2e-test:
-    runs-on: macos-latest
+    runs-on: ${{ matrix.platform }}
     permissions:
       contents: read
       id-token: write
     needs: test
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: ["macos-latest", "ubuntu-latest"]
     steps:
       - uses: actions/checkout@v4
       - working-directory: mitamae
