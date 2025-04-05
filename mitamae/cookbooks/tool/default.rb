@@ -20,7 +20,7 @@ define :tool, repository: nil, revision: nil do
     # Sometimes, the action is overwritten to :sync, so write it explicitly
     action :nothing 
     command <<EOC
-      binaries="$(find #{dirpath} -mindepth 0 -maxdepth 0 -type l)"
+      binaries="$(find #{dirpath} -mindepth 1 -maxdepth 1 -type f)"
       if [ -n "${binaries}" ]; then
         chmod +x $binaries
       fi
