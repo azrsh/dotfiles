@@ -9,7 +9,30 @@ define :tool, repository: nil, revision: nil do
   dirname = repo.gsub(/^https?:\/\/.*\/([^\/]*)\.git$/, '\1')
   dirpath = "#{home}/.local/tool/#{dirname}"
 
-  package "stow"
+  if node[:platform] == "darwin" then
+    package "git"
+    package "stow"
+  elsif node[:platform] == "ubuntu" then
+    package "git" do
+      user "root"
+    end
+    package "stow" do
+      user "root"
+    end
+  elsif node[:platform] == "arch" then
+    package "git" do
+      user "root"
+    end
+    package "which" do
+      user "root"
+    end
+    package "stow" do
+      user "root"
+    end
+  else
+    MItamae.logger.error "unsupported platform #{node[:platform]}: #{__FILE__}:#{__LINE__}"
+    exit 1
+  end
 
   git dirpath do
     repository repo
