@@ -1,0 +1,10 @@
+#!/bin/bash
+set -euCo pipefail
+
+cd ~/.local/dotfiles
+
+git pull origin "$(git branch --show-current)"
+git submodule foreach git reset --hard HEAD # Discard local changes
+git submodule update --init
+
+script/azdot-install
