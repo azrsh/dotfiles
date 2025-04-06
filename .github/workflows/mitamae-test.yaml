@@ -120,21 +120,18 @@ jobs:
         platform: ["darwin", "ubuntu", "arch"]
     steps:
       - uses: actions/checkout@v4
-      - working-directory: mitamae
-        if: ${{ matrix.platform != 'arch' }}
+      - if: ${{ matrix.platform != 'arch' }}
         shell: bash
         run: |
-          bash install.sh -l debug
-      - working-directory: mitamae
-        if: ${{ matrix.platform == 'arch' }}
+          bash setup.sh -l debug
+      - if: ${{ matrix.platform == 'arch' }}
         shell: bash
         run: |
           chown -vR dotfiles .
-      - working-directory: mitamae
-        if: ${{ matrix.platform == 'arch' }}
+      - if: ${{ matrix.platform == 'arch' }}
         shell: sudo -u dotfiles bash --noprofile --norc -eo pipefail {0}
         run: |
-          bash install.sh -l debug
+          bash setup.sh -l debug
 
   # A job that summarizes the results of jobs for required status checks.
   all-test:

@@ -36,7 +36,7 @@ jobs:
     container: archlinux:latest
     steps:
       - name: Install packages
-        run: pacman -Syu --noconfirm git stow
+        run: pacman -Syu --noconfirm git sudo
 
       - name: Check out the repo
         uses: actions/checkout@v4
@@ -70,12 +70,6 @@ jobs:
         run: |
           mv ~/.gitconfig ~/.gitconfig.local
 
-      - name: Install packages
-        env:
-          HOMEBREW_NO_AUTO_UPDATE: 1
-        run: |
-          brew install stow
-        
       - name: Run setup.sh
         run: bash setup.sh
         
