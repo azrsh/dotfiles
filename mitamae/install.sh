@@ -1,11 +1,10 @@
 #!/bin/bash
 
-set -eu
+set -euCo pipefail
 
 bin/setup
-
-# Homebrew does not allow sudo.
 case "$(uname)" in
   "Darwin")  bin/mitamae local $@ roles/darwin/default.rb ;;
-  *) exit 1 ;;
+  "Linux")  bin/mitamae local $@ roles/linux/default.rb ;;
+  *) echo "unsupproted platform: $(uname)"; exit 1 ;;
 esac

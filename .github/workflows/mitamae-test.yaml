@@ -30,53 +30,119 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      packages: read
     outputs:
-      tests: ${{ steps.convert-to-json.outputs.value }}
+      matrix-include: ${{ steps.matrix-include.outputs.value }}
     steps:
       - uses: actions/checkout@v4
-      - id: tests
+      - id: cookbooks
         run: |
-          tests="$(ls -A mitamae/cookbooks)"
-          echo "${tests}"
+          cookbooks="$(ls -A mitamae/cookbooks)"
+          echo "${cookbooks}"
           echo 'value<<EOF' >> $GITHUB_OUTPUT
-          echo "${tests}" >> $GITHUB_OUTPUT
+          echo "${cookbooks}" >> $GITHUB_OUTPUT
           echo 'EOF' >> $GITHUB_OUTPUT
         shell: bash
-      - id: convert-to-json
+      - id: find-platforms
+        env:
+          COOKBOOKS: ${{ steps.cookbooks.outputs.value }}
+        shell: bash
         run: |
-          json="$(echo '${{ steps.tests.outputs.value }}' | jq -R -s -c 'split("\n") | map(select(length > 0))')"
-          echo "${json}"
           echo 'value<<EOF' >> $GITHUB_OUTPUT
+          if [[ -n "${COOKBOOKS}" ]]; then
+            while read -r LINE; do
+              pushd "mitamae/cookbooks/${LINE}"
+              json="$(cat metadata.json | \
+                jq --arg cookbook "${LINE}" '{cookbook: $cookbook, platform: .platform[]}')"
+              echo "${json}"
+              echo "${json}" >> $GITHUB_OUTPUT
+              popd
+            done < <(printenv COOKBOOKS)
+          else
+            json='[]'
+            echo "${json}"
+            echo "${json}" >> $GITHUB_OUTPUT
+          fi
+          echo 'EOF' >> $GITHUB_OUTPUT
+      - id: matrix-include
+        env:
+          JSONS: ${{ steps.find-platforms.outputs.value }}
+        shell: bash
+        run: |
+          json="$(echo "${JSONS}" | jq -s '. | flatten')"
+          echo 'value<<EOF' >> $GITHUB_OUTPUT
+          echo "${json}"
           echo "${json}" >> $GITHUB_OUTPUT
           echo 'EOF' >> $GITHUB_OUTPUT
-        shell: bash
 
   test:
-    runs-on: macos-latest
+    runs-on: ${{ matrix.platform == 'darwin' && 'macos-latest' || 'ubuntu-latest' }}
+    container: ${{ matrix.platform == 'arch' && format('ghcr.io/azrsh/dotfiles/test:archlinux-{0}', github.sha) || null }}
     permissions:
       contents: read
     needs: [find, build-test-container]
     # Handle empty needs to resolve ` Matrix vector 'test' does not contain any values` error
-    if: ${{ needs.find.outputs.tests != '[]' }}
+    if: ${{ needs.find.outputs.matrix-include != '[]' }}
     strategy:
       fail-fast: false
       matrix:
-        test: ${{ fromJson(needs.find.outputs.tests) }}
+        include: ${{ fromJson(needs.find.outputs.matrix-include) }}
     steps:
       - uses: actions/checkout@v4
       - working-directory: mitamae
+        if: ${{ matrix.platform != 'arch' }}
+        shell: bash
         run: |
           bin/setup
-          bin/mitamae local -l debug cookbooks/${{ matrix.test }}/default.rb     
+          bin/mitamae local -l debug cookbooks/${{ matrix.cookbook }}/default.rb
+      - working-directory: mitamae
+        if: ${{ matrix.platform == 'arch' }}
+        shell: bash
+        run: |
+          chown -vR dotfiles .
+      - working-directory: mitamae
+        if: ${{ matrix.platform == 'arch' }}
+        shell: sudo -u dotfiles bash --noprofile --norc -eo pipefail {0}
+        run: |
+          bin/setup
+          bin/mitamae local -l debug cookbooks/${{ matrix.cookbook }}/default.rb
 
   e2e-test:
-    runs-on: macos-latest
+    runs-on: ${{ matrix.platform == 'darwin' && 'macos-latest' || 'ubuntu-latest' }}
+    container: ${{ matrix.platform == 'arch' && format('ghcr.io/azrsh/dotfiles/test:archlinux-{0}', github.sha) || null }}
     permissions:
       contents: read
-      id-token: write
-    needs: [test, build-test-container]
+      packages: read
+    needs: [build-test-container]
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: ["darwin", "ubuntu", "arch"]
     steps:
       - uses: actions/checkout@v4
       - working-directory: mitamae
+        if: ${{ matrix.platform != 'arch' }}
+        shell: bash
         run: |
           bash install.sh -l debug
+      - working-directory: mitamae
+        if: ${{ matrix.platform == 'arch' }}
+        shell: bash
+        run: |
+          chown -vR dotfiles .
+      - working-directory: mitamae
+        if: ${{ matrix.platform == 'arch' }}
+        shell: sudo -u dotfiles bash --noprofile --norc -eo pipefail {0}
+        run: |
+          bash install.sh -l debug
+
+  # A job that summarizes the results of jobs for required status checks.
+  all-test:
+    permissions: {}
+    runs-on: ubuntu-latest
+    needs: [find, test, e2e-test]
+    if: ${{ success() || (needs.find.result == 'success' && needs.find.outputs.matrix-include == '[]') }}
+    steps:
+      - name: Null Step
+        run: |
+          echo '${{ toJson(needs) }}'
