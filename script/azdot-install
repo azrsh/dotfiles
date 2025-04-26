@@ -2,11 +2,5 @@
 set -euCo pipefail
 
 realpath="$(realpath $0)"
-dotfiles_root="$(dirname ${realpath})/.."
-source "${dotfiles_root}/script/lib/script"
-source "${dotfiles_root}/script/lib/config"
-source "${dotfiles_root}/script/lib/tool"
-
-script_install
-config_install
-tool_install
+cd "$(dirname ${realpath})/.."
+bash setup.sh

@@ -1,8 +1,12 @@
 #!/bin/bash
-set -euo pipefail
+set -euCo pipefail
 
-# Entrypoint for codespaces
+# This script can be an entrypoint for codespaces
 
-DEFAULT_CONFIGS="vim tmux git"
-CONFIGS=${@:-"$DEFAULT_CONFIGS"}
-script/azdot-install ${CONFIGS}
+cd mitamae
+bin/setup
+case "$(uname)" in
+  "Darwin")  bin/mitamae local $@ roles/darwin/default.rb ;;
+  "Linux")  bin/mitamae local $@ roles/linux/default.rb ;;
+  *) echo "unsupproted platform: $(uname)"; exit 1 ;;
+esac
