@@ -22,6 +22,35 @@ set clipboard^=unnamedplus,unnamed
 
 command! Pe bd | setlocal buftype=nofile | execute 'r!git ls-files | peco' | e <cfile>
 
+function! RangeToGithubUrl(path, line1, line2) abort
+  const l:repo_url = trim(system("gh repo view --json=url -q='.url'"))
+  if v:shell_error
+    throw "Failed to get GitHub repository URL"
+  endif
+  const l:rev = trim(system("git rev-parse HEAD"))
+  if v:shell_error
+    throw "Failed to get Git revision"
+  endif
+  const l:path_in_repo = trim(system("git ls-files --full-name " . a:path))
+  if v:shell_error
+    throw  "Failed to get file path"
+  endif
+
+  if a:line1 < a:line2
+    return printf("%s/blame/%s/%s#L%d-L%d", l:repo_url, l:rev, l:path_in_repo, a:line1, a:line2)
+  elseif a:line1 == a:line2
+    return printf("%s/blame/%s/%s#L%d", l:repo_url, l:rev, l:path_in_repo, a:line1)
+  else
+    return printf("%s/blame/%s/%s#L%d-L%d", l:repo_url, l:rev, l:path_in_repo, a:line2, a:line1)
+  endif
+endfunction
+function! YankGithubUrl(path, line1, line2) abort
+  const l:url = RangeToGithubUrl(a:path, a:line1, a:line2)
+  call setreg(v:register, l:url)
+  echo printf("yanked %s", l:url)
+endfunction
+command! -range Yg call YankGithubUrl(expand("%:p"), <line1>, <line2>)
+
 if has('nvim')
     nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
     nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
