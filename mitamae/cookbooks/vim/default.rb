@@ -1,11 +1,18 @@
 if node[:platform] == "darwin" then
   package "git"
+  package "vim"
 elsif node[:platform] == "ubuntu" then
   package "git" do
     user "root"
   end
+  package "vim" do
+    user "root"
+  end
 elsif node[:platform] == "arch" then
   package "git" do
+    user "root"
+  end
+  package "vim" do
     user "root"
   end
   package "which" do

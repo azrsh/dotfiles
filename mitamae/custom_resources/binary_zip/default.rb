@@ -28,6 +28,21 @@ define :binary_zip, url: nil, path: nil, binary_checksum: nil, archive_checksum:
   expected_binary_checksum = "#{binary_checksum}  #{File.join(install_dest, name)}"
   install_check_command = "echo '#{expected_binary_checksum}' | sha256sum -c --status"
 
+  if node[:platform] == "darwin" then
+    # Do nothing, use the pre-installed unzip.
+  elsif node[:platform] == "ubuntu" then
+    package "unzip" do
+      user "root"
+    end
+  elsif node[:platform] == "arch" then
+    package "unzip" do
+      user "root"
+    end
+  else
+    MItamae.logger.error "unsupported platform #{node[:platform]}: #{__FILE__}:#{__LINE__}"
+    exit 1
+  end
+
   execute "download #{name}" do
     command "mkdir -p /tmp/#{archive_basename} && " \
             "cd /tmp/#{archive_basename} && " \
