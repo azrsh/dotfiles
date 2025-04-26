@@ -9,6 +9,7 @@
 [alias]
 	default-branch = symbolic-ref refs/remotes/origin/HEAD
 	branch-prune = "!function f() {\n  git for-each-ref refs/heads/ \"--format=%(refname:short)\" |\n    while read branch; do\n      ancestor=$(git merge-base $(git default-branch) $branch) &&\n        [[ $(git cherry $(git default-branch)  $(git commit-tree $(git rev-parse $branch^{tree}) -p $ancestor -m _)) == \"-\"* ]] &&\n        git branch -D $branch\n    done\n}; f"
+	fixup = "!git commit --fixup $(git log --oneline --decorate=full | peco | awk '{print $1}')"
 [diff]
 	tool = vimdiff
 [push]
