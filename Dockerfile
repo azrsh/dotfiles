@@ -1,4 +1,4 @@
-FROM ubuntu:latest@sha256:f8b860e4f9036f2694571770da292642eebcc4c2ea0c70a1a9244c2a1d436cd9
+FROM ubuntu:latest@sha256:7c06e91f61fa88c08cc74f7e1b7c69ae24910d745357e0dfe1d2c0322aaf20f9
 
 RUN apt-get update && \
   apt-get install -y sudo curl vim
