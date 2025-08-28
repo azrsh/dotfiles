@@ -1,8 +1,8 @@
 if node[:platform] == "darwin" then
   package "coreutils"
 
-  url = "https://github.com/alacritty/alacritty/releases/download/v0.13.2/Alacritty-v0.13.2.dmg"
-  checksum = "c71ce23fc365c4d046de2a48161d26232a5734c519e6b5ff3f55c60258260f60"
+  url = "https://github.com/alacritty/alacritty/releases/download/v0.15.1/Alacritty-v0.15.1.dmg"
+  checksum = "abaf240980cf3378031d1bfb3473d3b36abac15d679e2f780d5c0f09aa218459"
 
   archive_filename = File.basename(url)
   archive_basename = archive_filename.delete_suffix(".dmg")
@@ -16,8 +16,8 @@ if node[:platform] == "darwin" then
     command "mkdir -p /tmp/#{archive_basename} && " \
             "cd /tmp/#{archive_basename} && " \
             "curl -fsSLO #{url} && " \
-            "echo '#{archive_expected_checksum}' | sha256sum -c --status"
-    not_if "#{install_check_command} || echo '#{archive_expected_checksum}' | sha256sum -c --status"
+            "echo '#{archive_expected_checksum}' | gsha256sum -c --status"
+    not_if "#{install_check_command} || echo '#{archive_expected_checksum}' | gsha256sum -c --status"
   end
 
   execute "install Alacritty" do
