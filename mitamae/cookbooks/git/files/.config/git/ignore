@@ -10,3 +10,14 @@ Thumbs.db
 *~
 *.swp
 *.swo
+
+# Secret files #
+################
+.env
+.env.*
+.envrc
+.envrc.*
+
+# AI related files #
+####################
+**/.claude/settings.local.json
