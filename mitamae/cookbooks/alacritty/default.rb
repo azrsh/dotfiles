@@ -1,7 +1,9 @@
 if node[:platform] == "darwin" then
   package "coreutils"
 
-  url = "https://github.com/alacritty/alacritty/releases/download/v0.15.1/Alacritty-v0.15.1.dmg"
+  # renovate: datasource=github-releases depName=alacritty/alacritty versioning=semver
+  version = "0.15.1"
+  url = "https://github.com/alacritty/alacritty/releases/download/v#{version}/Alacritty-v#{version}.dmg"
   checksum = "abaf240980cf3378031d1bfb3473d3b36abac15d679e2f780d5c0f09aa218459"
 
   archive_filename = File.basename(url)
