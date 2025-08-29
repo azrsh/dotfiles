@@ -4,7 +4,7 @@ if node[:platform] == "darwin" then
   home = run_command("printenv HOME").stdout.strip
 
   # renovate: datasource=github-releases depName=ryanoasis/nerd-fonts versioning=semver
-  version = "3.2.1"
+  version = "3.4.0"
   url = "https://github.com/ryanoasis/nerd-fonts/releases/download/v#{version}/FiraCode.zip"
   checksum = "7e49cee33e358a3f861dc2c1117a6f0d12d04d1e3c4e3ca4b6d74f550ff7aa9c"
   archive_checksum = "4ee8fbafecfc90460399b9828270b8ece30ccbf60b3ab875d64ff77696c6e262"
