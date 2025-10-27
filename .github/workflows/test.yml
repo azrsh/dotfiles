@@ -51,7 +51,7 @@ jobs:
     container: archlinux:latest
     steps:
       - name: Install packages
-        run: pacman -Syu --noconfirm curl git stow
+        run: pacman -Syu --noconfirm curl git stow sudo
 
       - name: Run curl
         run: curl -L https://raw.githubusercontent.com/${{ github.repository }}/${SHA}/remote.sh | bash
@@ -90,3 +90,4 @@ jobs:
         run: curl -L https://raw.githubusercontent.com/${{ github.repository }}/${SHA}/remote.sh | bash
         env:
           SHA: ${{ github.sha }}
+
