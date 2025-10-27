@@ -26,7 +26,7 @@ define :binary_zip, url: nil, path: nil, binary_checksum: nil, archive_checksum:
   archive_expected_checksum = "#{archive_checksum}  #{archive_filepath}"
 
   expected_binary_checksum = "#{binary_checksum}  #{File.join(install_dest, name)}"
-  install_check_command = "echo '#{expected_binary_checksum}' | sha256sum -c --status"
+  install_check_command = "echo '#{expected_binary_checksum}' | sha256sum -c --status -"
 
   if node[:platform] == "darwin" then
     # Do nothing, use the pre-installed unzip.
@@ -47,8 +47,8 @@ define :binary_zip, url: nil, path: nil, binary_checksum: nil, archive_checksum:
     command "mkdir -p /tmp/#{archive_basename} && " \
             "cd /tmp/#{archive_basename} && " \
             "curl -fsSLO #{url} && " \
-            "echo '#{archive_expected_checksum}' | sha256sum -c --status"
-    not_if "#{install_check_command} || echo '#{archive_expected_checksum}' | sha256sum -c --status"
+            "echo '#{archive_expected_checksum}' | sha256sum -c --status -"
+    not_if "#{install_check_command} || echo '#{archive_expected_checksum}' | sha256sum -c --status -"
   end
 
   execute "install #{name}" do

@@ -19,22 +19,22 @@ if node[:platform] == "darwin" then
   file_expected_checksum = "#{checksum}  #{file_path}"
 
   expected_checksum = "#{checksum}  #{File.join(install_dest, file_name)}"
-  install_check_command = "echo '#{expected_checksum}' | gsha256sum -c --status"
+  install_check_command = "echo '#{expected_checksum}' | sha256sum -c --status -"
 
   # Use curl to support MacOS
   execute "download FiraCode" do
     command "mkdir -p /tmp/#{archive_basename} && " \
             "cd /tmp/#{archive_basename} && " \
             "curl -fsSLO #{url} && " \
-            "echo '#{archive_expected_checksum}' | gsha256sum -c --status"
-    not_if "#{install_check_command} || echo '#{archive_expected_checksum}' | gsha256sum -c --status"
+            "echo '#{archive_expected_checksum}' | sha256sum -c --status -"
+    not_if "#{install_check_command} || echo '#{archive_expected_checksum}' | sha256sum -c --status -"
   end
 
   execute "unzip FiraCode Nerd Font" do
     command "cd /tmp/#{archive_basename} && " \
             "unzip #{archive_filename} && " \
-            "echo '#{file_expected_checksum}' | gsha256sum -c --status"
-    not_if "#{install_check_command} || echo '#{file_expected_checksum}' | gsha256sum -c --status"
+            "echo '#{file_expected_checksum}' | sha256sum -c --status -"
+    not_if "#{install_check_command} || echo '#{file_expected_checksum}' | sha256sum -c --status"
   end
 
   execute "install FiraCode Nerd Font" do

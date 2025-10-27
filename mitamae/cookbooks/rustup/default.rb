@@ -17,7 +17,7 @@ if node[:platform] == "darwin" then
     command "mkdir -p /tmp/rustup && " \
             "cd /tmp/rustup && " \
             "curl -fsSLO #{url} && " \
-            "echo '#{expected_checksum}' | sha256sum -c --status && " \
+            "echo '#{expected_checksum}' | sha256sum -c --status - && " \
             "chmod +x #{filepath} && " \
             "#{filepath} -y"
     not_if "rustup --version"
@@ -37,7 +37,7 @@ elsif node[:platform] == "ubuntu" then
     command "mkdir -p /tmp/rustup && " \
             "cd /tmp/rustup && " \
             "curl -fsSLO #{url} && " \
-            "echo '#{expected_checksum}' | sha256sum -c --status && " \
+            "echo '#{expected_checksum}' | sha256sum -c --status - && " \
             "chmod +x #{filepath} && " \
             "#{filepath} -y"
     not_if "rustup --version"
@@ -57,7 +57,7 @@ elsif node[:platform] == "arch" then
     command "mkdir -p /tmp/rustup && " \
             "cd /tmp/rustup && " \
             "curl -fsSLO #{url} && " \
-            "echo '#{expected_checksum}' | sha256sum -c --status && " \
+            "echo '#{expected_checksum}' | sha256sum -c --status - && " \
             "chmod +x #{filepath} && " \
             "#{filepath} -y"
     not_if "rustup --version"
