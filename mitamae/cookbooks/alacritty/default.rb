@@ -18,8 +18,8 @@ if node[:platform] == "darwin" then
     command "mkdir -p /tmp/#{archive_basename} && " \
             "cd /tmp/#{archive_basename} && " \
             "curl -fsSLO #{url} && " \
-            "echo '#{archive_expected_checksum}' | gsha256sum -c --status"
-    not_if "#{install_check_command} || echo '#{archive_expected_checksum}' | gsha256sum -c --status"
+            "echo '#{archive_expected_checksum}' | sha256sum -c --status -"
+    not_if "#{install_check_command} || echo '#{archive_expected_checksum}' | sha256sum -c --status -"
   end
 
   execute "install Alacritty" do
