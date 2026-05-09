@@ -1,0 +1,29 @@
+{
+  "skill_name": "mitamae-sync",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Run a dry-run on the claude_code cookbook",
+      "expected_output": "Runs bin/mitamae local -n against the claude_code cookbook, interprets the diffs, distinguishes intended changes (e.g. go install) from spurious ones, and reports a summary",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "I just edited cookbooks/shell/default.rb — can you verify it works?",
+      "expected_output": "Infers the shell cookbook from the conversation, runs a dry-run against it, interprets any diffs, and reports a summary. If there are no errors, reports only intended changes.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "I want to dry-run mitamae to check something. I accidentally added require 'json' to claude_code/default.rb — is that OK?",
+      "expected_output": "Runs the dry-run, detects the mruby error for require, diagnoses that require is unavailable in mruby, removes the call or proposes the fix, then re-runs the dry-run to confirm success",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "I've configured hooks in ~/.claude/settings.json to run a policy check before every tool use. I want this to be part of my dotfiles so it gets set up automatically on any new machine. Can you add it to the cookbook template?",
+      "expected_output": "Runs a dry-run on the claude_code cookbook to see the current state, identifies hooks as a Machine-ahead key (present on machine, absent from template), reads the machine file to get the hooks content, updates the cookbook template to include the hooks section, and re-runs the dry-run to confirm the template is now in sync",
+      "files": []
+    }
+  ]
+}
