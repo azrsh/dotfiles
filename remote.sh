@@ -11,4 +11,4 @@ git pull origin ${SHA}
 git submodule update --init --recursive
 cd ${tmpdir}
 
-bash setup.sh -n
+bash setup.sh

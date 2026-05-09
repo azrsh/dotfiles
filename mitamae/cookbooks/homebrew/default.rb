@@ -11,7 +11,7 @@ install_check_command = "brew --version"
 execute "install homebrew" do
   command "mkdir -p /tmp/homebrew &&" \
           "cd /tmp/homebrew && " \
-          "wget #{url} && " \
+          "curl -fsSLO #{url} && " \
           "echo '#{expected_checksum}' | sha256sum -c --status &&" \
           "#{filepath}"
   not_if install_check_command

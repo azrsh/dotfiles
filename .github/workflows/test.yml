@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: true
 
@@ -39,7 +39,7 @@ jobs:
         run: pacman -Syu --noconfirm git sudo
 
       - name: Check out the repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: true
 
@@ -51,7 +51,7 @@ jobs:
     container: archlinux:latest
     steps:
       - name: Install packages
-        run: pacman -Syu --noconfirm curl git stow
+        run: pacman -Syu --noconfirm curl git stow sudo
 
       - name: Run curl
         run: curl -L https://raw.githubusercontent.com/${{ github.repository }}/${SHA}/remote.sh | bash
@@ -62,7 +62,7 @@ jobs:
     runs-on: macos-14
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           submodules: true
 
@@ -90,3 +90,4 @@ jobs:
         run: curl -L https://raw.githubusercontent.com/${{ github.repository }}/${SHA}/remote.sh | bash
         env:
           SHA: ${{ github.sha }}
+
