@@ -59,7 +59,7 @@ jobs:
           SHA: ${{ github.sha }}
 
   macos-setup:
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - name: Check out the repo
         uses: actions/checkout@v5
@@ -74,7 +74,7 @@ jobs:
         run: bash setup.sh
         
   macos-curl:
-    runs-on: macos-14
+    runs-on: macos-15
     steps:
       - name: Move .gitconfig
         run: |
