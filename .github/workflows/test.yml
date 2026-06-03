@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           submodules: true
 
@@ -36,7 +36,7 @@ jobs:
         run: pacman -Syu --noconfirm git sudo
 
       - name: Check out the repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           submodules: true
 
@@ -56,10 +56,10 @@ jobs:
           SHA: ${{ github.sha }}
 
   macos-setup:
-    runs-on: macos-14
+    runs-on: macos-26
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
         with:
           submodules: true
 
@@ -75,7 +75,7 @@ jobs:
         run: bash setup.sh
         
   macos-curl:
-    runs-on: macos-14
+    runs-on: macos-26
     steps:
       - name: Move .gitconfig
         run: |
