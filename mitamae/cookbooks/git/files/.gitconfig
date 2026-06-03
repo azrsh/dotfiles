@@ -9,7 +9,8 @@
 [alias]
 	default-branch = symbolic-ref refs/remotes/origin/HEAD
 	branch-prune = "!function f() {\n  git for-each-ref refs/heads/ \"--format=%(refname:short)\" |\n    while read branch; do\n      ancestor=$(git merge-base $(git default-branch) $branch) &&\n        [[ $(git cherry $(git default-branch)  $(git commit-tree $(git rev-parse $branch^{tree}) -p $ancestor -m _)) == \"-\"* ]] &&\n        git branch -D $branch\n    done\n}; f"
-	fixup = "!git commit --fixup $(git log --oneline --decorate=full | peco | awk '{print $1}')"
+	fixup = "!git commit --fixup $(git log --no-show-signature --oneline --decorate=full | peco | awk '{print $1}')"
+	psc = "!git push -f origin $(git log --no-show-signature --oneline --decorate=full | peco | awk '{print $1}'):refs/heads/$(git branch --show-current)"
 [diff]
 	tool = vimdiff
 [push]
@@ -18,5 +19,13 @@
 	log = diff-highlight | less
 	show = diff-highlight | less
 	diff = diff-highlight | less
+[rebase]
+	autosquash = true
+	autostash = true
+	updateRefs = true
+[pull]
+	rebase = interactive
+[log]
+	showSignature = true
 [include]
 	path = ~/.gitconfig.local

@@ -21,3 +21,6 @@ Thumbs.db
 # AI related files #
 ####################
 **/.claude/settings.local.json
+**/.claude/scheduled_tasks.lock
+**/.claude/worktrees/
+**/.local
