@@ -14,9 +14,6 @@ jobs:
         with:
           submodules: true
 
-      - name: Install packages
-        run: sudo apt-get install -y stow
-
       - name: Run setup.sh
         run: bash setup.sh
         
@@ -24,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install packages
-        run: sudo apt-get install -y git stow
+        run: sudo apt-get install -y git
 
       - name: Run curl
         run: curl -L https://raw.githubusercontent.com/${{ github.repository }}/${SHA}/remote.sh | bash
@@ -51,7 +48,7 @@ jobs:
     container: archlinux:latest
     steps:
       - name: Install packages
-        run: pacman -Syu --noconfirm curl git stow sudo
+        run: pacman -Syu --noconfirm curl git sudo
 
       - name: Run curl
         run: curl -L https://raw.githubusercontent.com/${{ github.repository }}/${SHA}/remote.sh | bash
@@ -70,6 +67,10 @@ jobs:
         run: |
           mv ~/.gitconfig ~/.gitconfig.local
 
+      - name: Uninstall Homebrew
+        run: |
+          NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
+
       - name: Run setup.sh
         run: bash setup.sh
         
@@ -80,11 +81,9 @@ jobs:
         run: |
           mv ~/.gitconfig ~/.gitconfig.local
 
-      - name: Install packages
-        env:
-          HOMEBREW_NO_AUTO_UPDATE: 1
+      - name: Uninstall Homebrew
         run: |
-          brew install stow
+          NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/uninstall.sh)"
 
       - name: Run curl
         run: curl -L https://raw.githubusercontent.com/${{ github.repository }}/${SHA}/remote.sh | bash
